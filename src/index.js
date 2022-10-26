@@ -10,13 +10,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 let queryClient = new QueryClient();
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
-      <GlobalStyle />
-      <App />
-    </QueryClientProvider>
-  </React.StrictMode>,
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools />
+    <GlobalStyle />
+    <App />
+  </QueryClientProvider>,
 );
 
 reportWebVitals();
