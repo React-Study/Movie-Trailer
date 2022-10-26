@@ -2,7 +2,7 @@ import axios from 'axios';
 import { BASE_URL, HTTP_METHOD } from 'util/consts';
 
 const customAxios = axios.create({
-  baseUrl: BASE_URL,
+  baseURL: BASE_URL,
   params: {
     api_key: process.env.REACT_APP_API_KEY,
   },
