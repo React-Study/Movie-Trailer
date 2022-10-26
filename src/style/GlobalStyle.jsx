@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset};
   
   body {
-    background-color: ${colors.gray1};
+    background-color: ${colors.white};
   }
   .a11yHidden {
     clip: rect(0 0 0 0);
