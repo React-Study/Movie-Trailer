@@ -1,12 +1,26 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import http from 'util/api/base';
+import { BASE_URL } from 'util/consts';
 
 const MoviePopularPage = () => {
   useEffect(() => {
     movieGet();
+    movieGet2();
     movieGenreGet();
     movieDiscoverGet();
   }, []);
+
+  const movieGet2 = async () => {
+    const response = await http.get({
+      url: `${BASE_URL}/movie/popular`,
+      params: { language: 'ko-KR', page: 1 },
+    });
+    /* 파일 전체에 no-console 룰 사용 안함, 파일 최상단에 선언 */
+    /* eslint-disable no-console */
+    console.log(response.data);
+    return response.data;
+  };
 
   const movieGet = async () => {
     axios
