@@ -1,8 +1,8 @@
 import React from 'react';
-import { Header } from 'common/Header';
-import Footer from 'common/Footer/Footer';
+import { Header } from 'components/common';
+import { Footer } from 'components/common';
 
-export default function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
     <React.Fragment>
       <Header />
@@ -10,4 +10,6 @@ export default function Layout({ children }) {
       <Footer />
     </React.Fragment>
   );
-}
+};
+
+export default Layout;
