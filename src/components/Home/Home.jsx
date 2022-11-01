@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
-import http from 'util/api/base';
+import React, { useEffect, useState } from 'react';
+import Layout from 'components/common/Layout/Layout';
+import { getDiscover, getTrending } from 'util/consts';
 
 const Home = () => {
+  const [popularData, setPopularData] = useState([]);
+  const [freeData, setFreeData] = useState([]);
+  const [trendingData, setTrendingData] = useState([]);
   // [search] url: /search/multi
 
-  const getDiscover = async (type, subType) => {
-    // type: tv, movie
-    // subtype: flatrate, theatres, rent, free
+  const getDiscoverData = async (type, subType) => {
+    // type: tv, movie | subtype: flatrate, theatres, rent, free
     const params = {
       language: 'ko-KR',
       watch_region: 'KR',
@@ -18,30 +21,32 @@ const Home = () => {
         params.with_watch_monetization_types = subType;
       }
     }
-    const response = await http.get({
-      url: `/discover/${type}`,
-      params: params,
-    });
-    return response.data;
+    if (subType === 'free') {
+      setFreeData(await getDiscover(type, params));
+    } else {
+      setPopularData(await getDiscover(type, params));
+    }
   };
 
-  const getTrending = async (timeWindow) => {
-    // day, week
-    const response = await http.get({
-      url: `/trending/all/${timeWindow}`,
-      params: { language: 'ko-KR' },
-    });
-    return response.data;
+  const getTrendingData = async (mediaType, timeWindow, language) => {
+    // mediaType: all | timeWindow: day, week
+    setTrendingData(await getTrending(mediaType, timeWindow, language));
   };
 
   useEffect(() => {
-    getDiscover('movie', 'theatres'); // popular 스트리밍
-    getDiscover('movie', 'free'); // free 영화
+    getDiscoverData('movie', 'theatres'); // popular 스트리밍
+    getDiscoverData('movie', 'free'); // free 영화
     // 최신 예고편
-    getTrending('day'); // trending 오늘
+    getTrendingData('all', 'day', 'ko-KR'); // trending 오늘
   }, []);
 
-  return <div></div>;
+  return (
+    <Layout>
+      {console.info(popularData)}
+      {console.info(freeData)}
+      {console.info(trendingData)}
+    </Layout>
+  );
 };
 
 export default Home;
