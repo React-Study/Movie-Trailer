@@ -1,13 +1,7 @@
-
-import { HomePage, MovieDetailPage, CharacterListPage } from 'pages';
+import { HomePage, MovieDetailPage, CharacterDetailPage, CharacterListPage } from 'pages';
 import { MoviePopularPage } from 'pages/moviePopular';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CHARACTER_LIST_PAGE, HOME_PAGE, MOVIE_DETAIL_PAGE, MOVIE_POPULAR_PAGE } from 'util/consts';
-
-import { HomePage, MovieDetailPage, CharacterDetailPage } from 'pages';
-import { MoviePopularPage } from 'pages/moviePopular';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CHARACTER_DETAIL_PAGE, HOME_PAGE, MOVIE_DETAIL_PAGE, MOVIE_POPULAR_PAGE } from 'util/consts';
+import { CHARACTER_LIST_PAGE, CHARACTER_DETAIL_PAGE, HOME_PAGE, MOVIE_DETAIL_PAGE, MOVIE_POPULAR_PAGE } from 'util/consts';
 
 
 function App() {

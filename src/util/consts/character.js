@@ -1,7 +1,7 @@
 import http from 'util/api/base';
 
 // CHARACTER 관련 상수
-const CHARACTER_API_ENDPOINT = '/character';
+const CHARACTER_API_ENDPOINT = '/person';
 
 export const getCharacterDetail = async (charcterId, language) => {
   try {
