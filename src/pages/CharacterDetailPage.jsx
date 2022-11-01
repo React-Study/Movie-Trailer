@@ -1,4 +1,4 @@
-import { CharacterDetail } from "components";
+import { CharacterDetail } from 'components';
 
 const CharacterDetailPage = () => {
   return <CharacterDetail />;

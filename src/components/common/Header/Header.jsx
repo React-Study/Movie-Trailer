@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from 'style';
 import styled from 'styled-components';
-import { CHARACTER_LIST_PAGE, HOME_PAGE, logoSrc, MOVIE_POPULAR_PAGE } from 'util/consts';
+import {
+  CHARACTER_LIST_PAGE,
+  HOME_PAGE,
+  logoSrc,
+  MOVIE_POPULAR_PAGE,
+} from 'util/consts';
 
 const Header = () => {
   return (

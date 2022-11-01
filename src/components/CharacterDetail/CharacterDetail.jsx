@@ -4,21 +4,23 @@ import { useParams } from 'react-router-dom';
 import { Layout } from 'components/common';
 
 const CharacterDetail = () => {
-    const [characterDetailData, setCharacterDetailData] = useState([]);
-    const id = useParams().id;
-  
-    const getCharacterDetailData = async (id) => {
-      setCharacterDetailData(await getCharacterDetail(id, 'ko-KR'));
-    };
-  
-    useEffect(() => {
-      getCharacterDetailData(id);
-    }, [id]);
+  const [characterDetailData, setCharacterDetailData] = useState([]);
+  const id = useParams().id;
 
-    return <Layout>
+  const getCharacterDetailData = async (id) => {
+    setCharacterDetailData(await getCharacterDetail(id, 'ko-KR'));
+  };
+
+  useEffect(() => {
+    getCharacterDetailData(id);
+  }, [id]);
+
+  return (
+    <Layout>
       {console.info(characterDetailData)}
-      {characterDetailData.name}      
-      </Layout>;
+      {characterDetailData.name}
+    </Layout>
+  );
 };
 
 export default CharacterDetail;

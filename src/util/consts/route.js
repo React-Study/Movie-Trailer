@@ -6,4 +6,4 @@ export const MOVIE_DETAIL_PAGE = '/movieDetail/:id';
 
 export const CHARACTER_LIST_PAGE = '/characterList';
 
-export const CHARACTER_DETAIL_PAGE = '/characterDetail/:id'
+export const CHARACTER_DETAIL_PAGE = '/characterDetail/:id';
