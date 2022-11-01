@@ -1,7 +1,7 @@
-import { CharacterList } from "components";
+import { CharacterList } from 'components';
 
 const CharacterListPage = () => {
-    return <CharacterList/>;
+  return <CharacterList />;
 };
 
 export default CharacterListPage;
