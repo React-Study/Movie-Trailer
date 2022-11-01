@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from 'style';
 import styled from 'styled-components';
-import { HOME_PAGE, logoSrc, MOVIE_POPULAR_PAGE } from 'util/consts';
+import { CHARACTER_LIST_PAGE, HOME_PAGE, logoSrc, MOVIE_POPULAR_PAGE } from 'util/consts';
 
 const Header = () => {
   return (
@@ -20,7 +20,7 @@ const Header = () => {
           <Link to={'/'}>TV프로그램</Link>
         </li>
         <li>
-          <Link to={'/'}>인물</Link>
+          <Link to={CHARACTER_LIST_PAGE}>인물</Link>
         </li>
       </ul>
     </HeaderWrap>
