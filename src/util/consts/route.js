@@ -1,1 +1,5 @@
 export const HOME_PAGE = '/';
+
+export const MOVIE_POPULAR_PAGE = '/moviePopular';
+
+export const MOVIE_DETAIL_PAGE = '/movieDetail/:id';
