@@ -1,116 +1,20 @@
-// import axios from 'axios';
-import axios from 'axios';
-import { Layout } from 'components/common';
-import React, { useEffect } from 'react';
-// import http from 'util/api/base';
-// import { BASE_URL } from 'util/consts';
+import React, { useEffect, useState } from 'react';
+import { getCharacterList } from 'util/consts';
+// import { useParams } from 'react-router-dom';
+import Layout from 'components/common/Layout/Layout';
 
 const CharacterList = () => {
-  useEffect(() => {
-    movieGet();
-    // movieGet2();
-    // movieGenreGet();
-    // movieDiscoverGet();
-  }, []);
+  const [characterListData, setCharacterListData] = useState([]);
 
-  // const movieGet2 = async () => {
-  //   const response = await http.get({
-  //     url: `${BASE_URL}/person`,
-  //     params: { language: 'ko-KR'},
-  //   });
-  //   /* 파일 전체에 no-console 룰 사용 안함, 파일 최상단에 선언 */
-  //   /* eslint-disable no-console */
-  //   console.log(response.data);
-  //   return response.data;
-  // };
-
-  const movieGet = async () => {
-    axios
-      .get('https://api.themoviedb.org/3/person', {
-        params: {
-          api_key: process.env.REACT_APP_API_KEY,
-          language: 'ko-KR',
-        },
-      })
-      .then((response) => {
-        /* 파일 전체에 no-console 룰 사용 안함, 파일 최상단에 선언 */
-        /* eslint-disable no-console */
-        console.log(response.data);
-      })
-      .catch((error) => {
-        // 오류발생시 실행
-      })
-      .then(function () {
-        // 항상 실행
-      });
+  const getCharacterListData = async () => {
+    setCharacterListData(await getCharacterList('ko-KR'));
   };
 
-  // const movieGet = async () => {
-  //   axios
-  //     .get('https://api.themoviedb.org/3/movie/popular', {
-  //       params: {
-  //         api_key: process.env.REACT_APP_MOVIE_API_KEY,
-  //         language: 'ko-KR',
-  //         page: 1,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       /* 파일 전체에 no-console 룰 사용 안함, 파일 최상단에 선언 */
-  //       /* eslint-disable no-console */
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       // 오류발생시 실행
-  //     })
-  //     .then(function () {
-  //       // 항상 실행
-  //     });
-  // };
+  useEffect(() => {
+    getCharacterListData();
+  }, []);
 
-  // const movieGenreGet = async () => {
-  //   axios
-  //     .get('https://api.themoviedb.org/3/genre/movie/list', {
-  //       params: {
-  //         api_key: process.env.REACT_APP_MOVIE_API_KEY,
-  //         language: 'ko-KR',
-  //       },
-  //     })
-  //     .then((response) => {
-  //       /* 파일 전체에 no-console 룰 사용 안함, 파일 최상단에 선언 */
-  //       /* eslint-disable no-console */
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       // 오류발생시 실행
-  //     })
-  //     .then(function () {
-  //       // 항상 실행
-  //     });
-  // };
-
-  // const movieDiscoverGet = async () => {
-  //   axios
-  //     .get('https://api.themoviedb.org/3/discover/movie', {
-  //       params: {
-  //         api_key: process.env.REACT_APP_MOVIE_API_KEY,
-  //         language: 'ko-KR',
-  //         sort_by: 'popularity.desc',
-  //         page: 2,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       /* 파일 전체에 no-console 룰 사용 안함, 파일 최상단에 선언 */
-  //       /* eslint-disable no-console */
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       // 오류발생시 실행
-  //     })
-  //     .then(function () {
-  //       // 항상 실행
-  //     });
-  // };
-  return <Layout></Layout>;
+  return <Layout>{console.info(characterListData)}</Layout>;
 };
 
 export default CharacterList;
