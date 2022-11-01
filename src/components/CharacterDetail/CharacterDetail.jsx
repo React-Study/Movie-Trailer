@@ -15,12 +15,7 @@ const CharacterDetail = () => {
     getCharacterDetailData(id);
   }, [id]);
 
-  return (
-    <Layout>
-      {console.info(characterDetailData)}
-      {characterDetailData.name}
-    </Layout>
-  );
+  return <Layout>{console.info(characterDetailData)}</Layout>;
 };
 
 export default CharacterDetail;

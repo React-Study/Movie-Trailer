@@ -3,6 +3,22 @@ import http from 'util/api/base';
 // CHARACTER 관련 상수
 const CHARACTER_API_ENDPOINT = '/person';
 
+export const getCharacterList = async (language) => {
+  try {
+    const res = await http.get({
+      url: `${CHARACTER_API_ENDPOINT}/popular`,
+      params: {
+        language: language,
+      },
+    });
+
+    return res.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+
 export const getCharacterDetail = async (charcterId, language) => {
   try {
     const res = await http.get({
@@ -17,3 +33,4 @@ export const getCharacterDetail = async (charcterId, language) => {
     throw new Error(e);
   }
 };
+
