@@ -18,7 +18,6 @@ export const getCharacterList = async (language) => {
   }
 };
 
-
 export const getCharacterDetail = async (charcterId, language) => {
   try {
     const res = await http.get({
@@ -33,4 +32,3 @@ export const getCharacterDetail = async (charcterId, language) => {
     throw new Error(e);
   }
 };
-
