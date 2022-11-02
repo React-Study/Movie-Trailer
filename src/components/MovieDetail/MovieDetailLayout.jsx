@@ -5,7 +5,7 @@ import { Layout } from 'components/common';
 import MovieDetail from './MovieDetail';
 
 const MovieDetailLayout = () => {
-  const [movieDetailData, setMovieDetailData] = useState([]);
+  const [movieDetailData, setMovieDetailData] = useState(null);
   const id = useParams().id;
 
   const getMovieDetailData = async (id) => {
@@ -16,7 +16,13 @@ const MovieDetailLayout = () => {
     getMovieDetailData(id);
   }, [id]);
 
-  return <Layout children={<MovieDetail data={movieDetailData} />} />;
+  console.info(movieDetailData);
+
+  return (
+    movieDetailData && (
+      <Layout children={<MovieDetail data={movieDetailData} />} />
+    )
+  );
 };
 
 export default MovieDetailLayout;
