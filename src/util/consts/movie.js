@@ -2,6 +2,7 @@ import http from 'util/api/base';
 
 // MOVIE 관련 상수 적는 곳입니다.
 const MOVIE_API_ENDPOINT = '/movie';
+export const POSTER_PATH_END_POINT = 'https://image.tmdb.org/t/p/original/';
 
 export const getMovieDetail = async (movieId, language) => {
   try {
