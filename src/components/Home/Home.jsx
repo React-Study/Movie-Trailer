@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from 'components/common/Layout/Layout';
+import { CoverList } from 'components/common/CoverList';
 import { getDiscover, getTrending } from 'util/consts';
 
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getDiscoverData('movie', 'theatres'); // popular 스트리밍
+    getDiscoverData('movie', 'flatrate'); // popular 스트리밍
     getDiscoverData('movie', 'free'); // free 영화
     // 최신 예고편
     getTrendingData('all', 'day', 'ko-KR'); // trending 오늘
@@ -42,7 +43,7 @@ const Home = () => {
 
   return (
     <Layout>
-      {console.info(popularData)}
+      <CoverList headerTitle="What's Popular" data={popularData}></CoverList>
       {console.info(freeData)}
       {console.info(trendingData)}
     </Layout>
