@@ -8,8 +8,8 @@ import {
   MovieDetailPage,
   CharacterDetailPage,
   CharacterListPage,
+  MoviePage,
 } from 'pages';
-import { MoviePopularPage } from 'pages/moviePopular';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
   CHARACTER_LIST_PAGE,
@@ -24,7 +24,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path={HOME_PAGE} element={<HomePage />}></Route>
-        <Route path={MOVIE_POPULAR_PAGE} element={<MoviePopularPage />}></Route>
+        <Route path={MOVIE_POPULAR_PAGE} element={<MoviePage />}></Route>
         <Route path={MOVIE_DETAIL_PAGE} element={<MovieDetailPage />}></Route>
         <Route
           path={CHARACTER_LIST_PAGE}
