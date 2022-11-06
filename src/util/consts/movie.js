@@ -18,3 +18,16 @@ export const getMovieDetail = async (movieId, language) => {
     throw new Error(e);
   }
 };
+
+export const getMovie = async (pageName, paramObj) => {
+  try {
+    const res = await http.get({
+      url: `${MOVIE_API_ENDPOINT}/${pageName}`,
+      params: paramObj,
+    });
+
+    return res.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
