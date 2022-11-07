@@ -7,7 +7,7 @@ import {
   HomePage,
   MovieDetailPage,
   CharacterDetailPage,
-  CharacterListPage,
+  CharacterPage,
   MoviePage,
 } from 'pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -28,7 +28,7 @@ function App() {
         <Route path={MOVIE_DETAIL_PAGE} element={<MovieDetailPage />}></Route>
         <Route
           path={CHARACTER_LIST_PAGE}
-          element={<CharacterListPage />}
+          element={<CharacterPage />}
         ></Route>
         <Route
           path={CHARACTER_DETAIL_PAGE}

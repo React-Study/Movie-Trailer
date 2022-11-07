@@ -14,7 +14,7 @@ root.render(
     <ReactQueryDevtools />
     <GlobalStyle />
     <App />
-  </QueryClientProvider>,
+  </QueryClientProvider>
 );
 
 reportWebVitals();
