@@ -3,10 +3,11 @@ import http from 'util/api/base';
 // CHARACTER 관련 상수
 const CHARACTER_API_ENDPOINT = '/person';
 
-export const getCharacterList = async (language) => {
+export const getCharacter = async (pageName, language) => {
+  console.info(pageName)
   try {
     const res = await http.get({
-      url: `${CHARACTER_API_ENDPOINT}/popular`,
+      url: `${CHARACTER_API_ENDPOINT}/${pageName}`,
       params: {
         language: language,
       },
