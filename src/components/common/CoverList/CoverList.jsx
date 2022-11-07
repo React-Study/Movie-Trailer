@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { BASE_IMAGE_URL, w220h330 } from 'util/consts';
 import { typeText } from 'util/consts';
 
 const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
-  const IMG_URL = 'https://image.tmdb.org/t/p/w220_and_h330_face'; // 임시
   const [active, setActive] = useState(types[0]);
 
   return (
@@ -29,7 +29,10 @@ const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
         {data.results &&
           data.results.map((e) => (
             <Item key={e.id}>
-              <img src={`${IMG_URL}${e.poster_path}`} />
+              <img
+                src={`${BASE_IMAGE_URL}${w220h330}${e.poster_path}`}
+                alt={e.title}
+              />
               <p>
                 {e.title ? e.title : e.name} <span>⭐️ {e.vote_average}</span>
               </p>
