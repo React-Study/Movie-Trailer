@@ -2,8 +2,9 @@ import React from 'react';
 import { Header } from 'components/common';
 import { Footer } from 'components/common';
 import styled from 'styled-components';
+import { Title } from '../Title';
 
-const CardListLayout = ({ title, children }) => {
+const CardListLayout = ({ children }) => {
   return (
     <React.Fragment>
       <Header />
@@ -12,7 +13,7 @@ const CardListLayout = ({ title, children }) => {
           <div className="media discover">
             <div className="column_wrapper">
               <div className="content_wrapper">
-                {title}
+                <Title />
                 <div className="content">{children}</div>
               </div>
             </div>
@@ -66,7 +67,7 @@ const Content = styled.div`
         .content_wrapper {
           max-width: var(--maxPrimaryPageWidth);
           width: 100%;
-          display: flex;
+          // display: flex;
           align-items: flex-start;
           align-content: flex-start;
           padding-left: 40px;
