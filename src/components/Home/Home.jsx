@@ -4,12 +4,14 @@ import { CoverList } from 'components/common/CoverList';
 import { getDiscover, getTrending } from 'util/consts';
 
 const Home = () => {
+  const [tabTypes, setTabTypes] = useState([]);
   const [popularData, setPopularData] = useState([]);
   const [freeData, setFreeData] = useState([]);
   const [trendingData, setTrendingData] = useState([]);
   // [search] url: /search/multi
 
   const getDiscoverData = async (type, subType) => {
+    setTabTypes(['flatrate', 'tv', 'rent', 'theatres']);
     // type: tv, movie | subtype: flatrate, theatres, rent, free
     const params = {
       language: 'ko-KR',
@@ -34,6 +36,19 @@ const Home = () => {
     setTrendingData(await getTrending(mediaType, timeWindow, language));
   };
 
+  const onChangeTab = (e, category) => {
+    if (category === 'popular') {
+      switch (e) {
+        case 'tv':
+          getDiscoverData('tv');
+          break;
+        default:
+          getDiscoverData('movie', e);
+          break;
+      }
+    }
+  };
+
   useEffect(() => {
     getDiscoverData('movie', 'flatrate'); // popular 스트리밍
     getDiscoverData('movie', 'free'); // free 영화
@@ -43,7 +58,15 @@ const Home = () => {
 
   return (
     <Layout>
-      <CoverList headerTitle="What's Popular" data={popularData}></CoverList>
+      {tabTypes.length > 0 && (
+        <CoverList
+          headerTitle="What's Popular"
+          data={popularData}
+          types={tabTypes}
+          changeTab={onChangeTab}
+          category="popular"
+        ></CoverList>
+      )}
       {console.info(freeData)}
       {console.info(trendingData)}
     </Layout>
