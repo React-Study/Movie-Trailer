@@ -4,14 +4,15 @@ import { CoverList } from 'components/common/CoverList';
 import { getDiscover, getTrending } from 'util/consts';
 
 const Home = () => {
-  const [tabTypes, setTabTypes] = useState([]);
+  const popularTypes = ['flatrate', 'tv', 'rent', 'theatres'];
+  const freeTypes = ['movie', 'tv'];
+  const trendingTypes = ['day', 'week'];
   const [popularData, setPopularData] = useState([]);
   const [freeData, setFreeData] = useState([]);
   const [trendingData, setTrendingData] = useState([]);
   // [search] url: /search/multi
 
   const getDiscoverData = async (type, subType) => {
-    setTabTypes(['flatrate', 'tv', 'rent', 'theatres']);
     // type: tv, movie | subtype: flatrate, theatres, rent, free
     const params = {
       language: 'ko-KR',
@@ -37,15 +38,22 @@ const Home = () => {
   };
 
   const onChangeTab = (e, category) => {
-    if (category === 'popular') {
-      switch (e) {
-        case 'tv':
+    switch (category) {
+      case 'popular':
+        if (e === 'tv') {
           getDiscoverData('tv');
-          break;
-        default:
+        } else {
           getDiscoverData('movie', e);
-          break;
-      }
+        }
+        break;
+      case 'free':
+        getDiscoverData(e, category);
+        break;
+      case 'trending':
+        getTrendingData('all', e, 'ko-KR');
+        break;
+      default:
+        break;
     }
   };
 
@@ -58,17 +66,33 @@ const Home = () => {
 
   return (
     <Layout>
-      {tabTypes.length > 0 && (
+      {popularTypes.length > 0 && (
         <CoverList
           headerTitle="What's Popular"
           data={popularData}
-          types={tabTypes}
+          types={popularTypes}
           changeTab={onChangeTab}
           category="popular"
         ></CoverList>
       )}
-      {console.info(freeData)}
-      {console.info(trendingData)}
+      {freeTypes.length > 0 && (
+        <CoverList
+          headerTitle="Free To Watch"
+          data={freeData}
+          types={freeTypes}
+          changeTab={onChangeTab}
+          category="free"
+        ></CoverList>
+      )}
+      {trendingTypes.length > 0 && (
+        <CoverList
+          headerTitle="트렌딩"
+          data={trendingData}
+          types={trendingTypes}
+          changeTab={onChangeTab}
+          category="trending"
+        ></CoverList>
+      )}
     </Layout>
   );
 };
