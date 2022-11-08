@@ -1,6 +1,6 @@
 import { CardListLayout } from 'components/common';
+import { Filter } from 'components/common/Filter';
 import { MovieList } from 'components/common/MovieCard';
-import { Title } from 'components/common/Title';
 import React, { useEffect, useState } from 'react';
 import { getMovie } from 'util/consts';
 
@@ -18,7 +18,7 @@ const Moive = () => {
 
   return (
     <CardListLayout>
-      <Title />
+      <Filter />
       {movieData !== null ? <MovieList moiveList={movieData} /> : null}
     </CardListLayout>
   );

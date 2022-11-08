@@ -94,7 +94,8 @@ const CardBody = styled.div`
   flex-wrap: wrap;
   align-content: flex-start;
   border: 1px solid #e3e3e3;
-  border-radius: var(--imageBorderRadius);
+  border-radius: 20px;
+  // border-radius: var(--imageBorderRadius);
   overflow: hidden;
   margin-top: 30px;
   width: calc(
