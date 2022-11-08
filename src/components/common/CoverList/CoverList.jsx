@@ -47,8 +47,8 @@ const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
 export default CoverList;
 
 const CoverListWrap = styled.section`
-  width: 80%;
-  padding: 40px;
+  width: 90%;
+  padding: 20px 40px 20px 40px;
 `;
 
 const TitleWrap = styled.div`

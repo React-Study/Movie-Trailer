@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import Layout from 'components/common/Layout/Layout';
 import { CoverList } from 'components/common/CoverList';
-import { getDiscover, getTrending } from 'util/consts';
+import {
+  getDiscover,
+  getTrending,
+  getUpcoming,
+  //getUpcomingVideo,
+} from 'util/consts';
 
 const Home = () => {
   const popularTypes = ['flatrate', 'tv', 'rent', 'theatres'];
   const freeTypes = ['movie', 'tv'];
+  const upcomingTypes = ['movie'];
   const trendingTypes = ['day', 'week'];
   const [popularData, setPopularData] = useState([]);
   const [freeData, setFreeData] = useState([]);
+  const [upcomingData, setUpcomingData] = useState([]);
+  //const [upcomingVideoData, setUpcomingVideoData] = useState([]);
   const [trendingData, setTrendingData] = useState([]);
   // [search] url: /search/multi
 
@@ -31,6 +39,14 @@ const Home = () => {
       setPopularData(await getDiscover(type, params));
     }
   };
+
+  const getUpcomingData = async (language) => {
+    setUpcomingData(await getUpcoming(language));
+  };
+
+  //const getUpcomingVideoData = async (id) => {
+  //  setUpcomingVideoData(await getUpcomingVideo(id));
+  //};
 
   const getTrendingData = async (mediaType, timeWindow, language) => {
     // mediaType: all | timeWindow: day, week
@@ -60,7 +76,7 @@ const Home = () => {
   useEffect(() => {
     getDiscoverData('movie', 'flatrate'); // popular 스트리밍
     getDiscoverData('movie', 'free'); // free 영화
-    // 최신 예고편
+    getUpcomingData('ko-KR'); // 최신 예고편
     getTrendingData('all', 'day', 'ko-KR'); // trending 오늘
   }, []);
 
@@ -82,6 +98,15 @@ const Home = () => {
           types={freeTypes}
           changeTab={onChangeTab}
           category="free"
+        ></CoverList>
+      )}
+      {upcomingTypes.length > 0 && (
+        <CoverList
+          headerTitle="최신 예고편"
+          data={upcomingData}
+          types={upcomingTypes}
+          changeTab={onChangeTab}
+          category="upcoming"
         ></CoverList>
       )}
       {trendingTypes.length > 0 && (
