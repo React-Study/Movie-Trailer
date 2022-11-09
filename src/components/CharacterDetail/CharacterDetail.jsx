@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { IMAGE_URL } from 'util/consts';
@@ -12,14 +12,20 @@ const CharacterDetail = ({data, data2}) => {
     place_of_birth,
     profile_path
   } = data;
+  const {
+    translations
+  } = data2;
+  // useEffect(() => {
+	// 	if(data2 && data2.length > 0) {
+	// 		// console.info(data2.translations[0]);
+  //     const {translations} = data2;
+  //     console.info(translations)
+	// 	}
+	// }, [data2])
+  console.info(translations)
 
-  useEffect(() => {
-		if(data2 && data2.length > 0) {
-			// console.info(data2.translations[0]);
-      const {translations} = data2;
-      console.info(translations)
-		}
-	}, [data2])
+  let bio = translations? translations[0].data.biography : '';
+  console.info(bio);
 
   let personGender = '';
   if(gender === 2 ) { personGender = '남성'; } 
@@ -45,6 +51,7 @@ const CharacterDetail = ({data, data2}) => {
         <RightBox>
           <h1>{name}</h1>
           <h2>약력</h2>
+          <p>{bio}</p>
           <h2>유명 분야</h2>
           {/* {characterCreditData.cast} */}
           <h2>연기</h2>
@@ -89,5 +96,9 @@ const RightBox = styled.div`
     font-weight: bold;
     margin-top: 40px;
     margin-bottom: 18px;
+  }
+  p {
+    font-size: 18px;
+    font-weight: normal;
   }
 `;
