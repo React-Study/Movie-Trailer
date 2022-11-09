@@ -1,1 +1,1 @@
-export { default as CharacterDetail } from './CharacterDetail';
+export { default as CharacterDetailLayout } from './CharacterDetailLayout';
