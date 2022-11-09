@@ -30,8 +30,8 @@ const Character = () => {
               itemsCountPerPage={10}
               totalItemsCount={5000}
               pageRangeDisplayed={5}
-              prevPageText={"‹"}
-              nextPageText={"›"}
+              prevPageText={"<"}
+              nextPageText={">"}
               onChange={handlePageChange}
             />
         </Layout>
