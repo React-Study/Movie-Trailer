@@ -1,7 +1,7 @@
-import { CharacterDetail } from 'components';
+import { CharacterDetailLayout } from 'components';
 
 const CharacterDetailPage = () => {
-  return <CharacterDetail />;
+  return <CharacterDetailLayout />;
 };
 
 export default CharacterDetailPage;
