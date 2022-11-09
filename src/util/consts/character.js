@@ -3,13 +3,14 @@ import http from 'util/api/base';
 // CHARACTER 관련 상수
 const CHARACTER_API_ENDPOINT = '/person';
 
-export const getCharacter = async (pageName, language) => {
-  console.info(pageName)
+export const getCharacter = async (pageName, {language, page}) => {
+  // console.info(pageName, language, page)
   try {
     const res = await http.get({
-      url: `${CHARACTER_API_ENDPOINT}/${pageName}`,
+      url: `${CHARACTER_API_ENDPOINT}/${pageName}?laguage=${language}&page=${page}`,
       params: {
         language: language,
+        page: page
       },
     });
 
