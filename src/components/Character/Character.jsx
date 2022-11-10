@@ -27,9 +27,11 @@ const Character = () => {
             {characterData !== null ? <CharacterList characterList={characterData}/> : null}
             <Pagination
               activePage={page}
-              itemsCountPerPage={10}
-              totalItemsCount={5000}
-              pageRangeDisplayed={5}
+              breakLabel="..."
+              pageCount={10}
+              itemsCountPerPage={50}
+              totalItemsCount={500}
+              pageRangeDisplayed={50}
               prevPageText={"‹"}
               nextPageText={"›"}
               onChange={handlePageChange}
