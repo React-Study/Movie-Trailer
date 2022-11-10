@@ -13,11 +13,6 @@ const CharacterList = ({characterList}) => {
             return <CharacterBox key={data.id} characterData={data} />;
           })}
         </div>
-        {/* <div className='pagination_wrap'>
-          <div className='pagination'>
-            <a pageList></a>
-          </div>
-        </div> */}
     </ListBody>
   );
 };
