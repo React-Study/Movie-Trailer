@@ -34,3 +34,18 @@ export const getCharacterDetail = async (charcterId, language) => {
     throw new Error(e);
   }
 };
+
+export const getCharacterCreidit = async (charcterId, language) => {
+  try {
+    const res = await http.get({
+      url: `${CHARACTER_API_ENDPOINT}/${charcterId}/translations`,
+      params: {
+        language: language,
+      },
+    });
+
+    return res.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};

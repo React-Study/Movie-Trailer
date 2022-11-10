@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BASE_IMAGE_URL, w220h330 } from 'util/consts';
 
 const MovieCard = ({ movieData }) => {
+  const { poster_path, release_date } = movieData;
   return (
     <CardBody>
       <div className="image">
@@ -10,7 +11,7 @@ const MovieCard = ({ movieData }) => {
           <div className="imageClick">
             <img
               className="poster"
-              src={`${BASE_IMAGE_URL}${w220h330}${movieData.poster_path}`}
+              src={`${BASE_IMAGE_URL}${w220h330}${poster_path}`}
             />
           </div>
         </div>
@@ -19,7 +20,7 @@ const MovieCard = ({ movieData }) => {
         <h2>
           <div className="titleName">{/* {movieData.title} */}</div>
         </h2>
-        <p>{movieData.release_date}</p>
+        <p>{release_date}</p>
       </Content>
       <Hover />
     </CardBody>
@@ -93,7 +94,8 @@ const CardBody = styled.div`
   flex-wrap: wrap;
   align-content: flex-start;
   border: 1px solid #e3e3e3;
-  border-radius: var(--imageBorderRadius);
+  border-radius: 20px;
+  // border-radius: var(--imageBorderRadius);
   overflow: hidden;
   margin-top: 30px;
   width: calc(
