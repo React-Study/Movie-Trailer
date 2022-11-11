@@ -1,10 +1,39 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { BASE_IMAGE_URL, w220h330 } from 'util/consts';
-import { typeText } from 'util/consts';
+import {
+  BASE_IMAGE_URL,
+  w220h330,
+  typeText,
+  getUpcomingVideo,
+} from 'util/consts';
 
 const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
+  const YOUTUBE_URL = 'https://www.youtube.com/embed/';
   const [active, setActive] = useState(types[0]);
+  const [videoUrl, setVideoUrl] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const onClickVideo = (id) => {
+    getUpcomingVideoData(id);
+  };
+
+  const onClickDetail = (id) => {
+    // 상세 페이지 이동
+  };
+
+  const getUpcomingVideoData = async (id) => {
+    const videoData = await getUpcomingVideo(id);
+    videoData.results.length > 0 &&
+      setVideoUrl({
+        id: videoData.id,
+        url: `${YOUTUBE_URL}${videoData.results[0].key}?autoplay=1`,
+      });
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <CoverListWrap>
@@ -32,7 +61,24 @@ const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
               <img
                 src={`${BASE_IMAGE_URL}${w220h330}${e.poster_path}`}
                 alt={e.title}
+                onClick={() =>
+                  category === 'upcoming'
+                    ? onClickVideo(e.id)
+                    : onClickDetail(e.id)
+                }
               />
+              {modalOpen && videoUrl.id === e.id && (
+                <div>
+                  <button onClick={closeModal}>X</button>
+                  <iframe
+                    key={`iframe-${e.id}`}
+                    title={e.id}
+                    src={`${videoUrl.url}`}
+                    width="600"
+                    height="300"
+                  ></iframe>
+                </div>
+              )}
               <p>
                 {e.title ? e.title : e.name} <span>⭐️ {e.vote_average}</span>
               </p>
@@ -54,7 +100,6 @@ const CoverListWrap = styled.section`
 const TitleWrap = styled.div`
   display: flex;
   padding: 20px;
-
   span {
     font-weight: 700;
     font-size: 1.5em;
@@ -108,17 +153,33 @@ const Item = styled.div`
   width: 150px;
   min-width: 150px;
   line-height: 20px;
-
+  text-align: center;
   img {
     width: 100%;
     border-radius: 10px;
   }
-
   p {
     font-weight: 700;
   }
-
   span {
     color: rgb(0 0 0 / 60%);
+  }
+  div {
+    width: 92%;
+    z-index: 999;
+    position: absolute;
+    top: 1200px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000;
+    border: 1px solid black;
+    border-radius: 8px;
+  }
+  button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  iframe {
   }
 `;

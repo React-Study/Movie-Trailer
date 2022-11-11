@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Layout from 'components/common/Layout/Layout';
 import { CoverList } from 'components/common/CoverList';
-import {
-  getDiscover,
-  getTrending,
-  getUpcoming,
-  //getUpcomingVideo,
-} from 'util/consts';
+import { getDiscover, getTrending, getUpcoming } from 'util/consts';
 
 const Home = () => {
   const popularTypes = ['flatrate', 'tv', 'rent', 'theatres'];
@@ -16,7 +11,6 @@ const Home = () => {
   const [popularData, setPopularData] = useState([]);
   const [freeData, setFreeData] = useState([]);
   const [upcomingData, setUpcomingData] = useState([]);
-  //const [upcomingVideoData, setUpcomingVideoData] = useState([]);
   const [trendingData, setTrendingData] = useState([]);
   // [search] url: /search/multi
 
@@ -43,10 +37,6 @@ const Home = () => {
   const getUpcomingData = async (language) => {
     setUpcomingData(await getUpcoming(language));
   };
-
-  //const getUpcomingVideoData = async (id) => {
-  //  setUpcomingVideoData(await getUpcomingVideo(id));
-  //};
 
   const getTrendingData = async (mediaType, timeWindow, language) => {
     // mediaType: all | timeWindow: day, week
