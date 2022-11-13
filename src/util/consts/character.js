@@ -49,3 +49,18 @@ export const getCharacterCreidit = async (charcterId, language) => {
     throw new Error(e);
   }
 };
+  
+export const getCharacterMovieCreidit = async (charcterId, language) => {
+  try {
+    const res = await http.get({
+      url: `${CHARACTER_API_ENDPOINT}/${charcterId}/movie_credits`,
+      params: {
+        language: language,
+      },
+    });
+
+    return res.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
