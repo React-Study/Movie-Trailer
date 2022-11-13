@@ -5,34 +5,28 @@ import {
   w220h330,
   typeText,
   getUpcomingVideo,
+  YOUTUBE_URL,
 } from 'util/consts';
+import VideoModal from '../VideoModal/VideoModal';
 
 const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
-  const YOUTUBE_URL = 'https://www.youtube.com/embed/';
   const [active, setActive] = useState(types[0]);
   const [videoUrl, setVideoUrl] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
-  const onClickVideo = (id) => {
-    getUpcomingVideoData(id);
-  };
-
-  const onClickDetail = (id) => {
+  const handleClickDetail = (id) => {
     // 상세 페이지 이동
   };
 
   const getUpcomingVideoData = async (id) => {
     const videoData = await getUpcomingVideo(id);
-    videoData.results.length > 0 &&
-      setVideoUrl({
-        id: videoData.id,
-        url: `${YOUTUBE_URL}${videoData.results[0].key}?autoplay=1`,
-      });
+    const videoKey =
+      videoData.results.length > 0 ? videoData.results[0].key : '';
+    setVideoUrl({
+      id: videoData.id,
+      url: `${YOUTUBE_URL}${videoKey}?autoplay=1`,
+    });
     setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
   };
 
   return (
@@ -63,21 +57,16 @@ const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
                 alt={e.title}
                 onClick={() =>
                   category === 'upcoming'
-                    ? onClickVideo(e.id)
-                    : onClickDetail(e.id)
+                    ? getUpcomingVideoData(e.id)
+                    : handleClickDetail(e.id)
                 }
               />
               {modalOpen && videoUrl.id === e.id && (
-                <div>
-                  <button onClick={closeModal}>X</button>
-                  <iframe
-                    key={`iframe-${e.id}`}
-                    title={e.id}
-                    src={`${videoUrl.url}`}
-                    width="600"
-                    height="300"
-                  ></iframe>
-                </div>
+                <VideoModal
+                  id={e.id}
+                  url={videoUrl.url}
+                  setModalOpen={setModalOpen}
+                ></VideoModal>
               )}
               <p>
                 {e.title ? e.title : e.name} <span>⭐️ {e.vote_average}</span>
@@ -157,29 +146,12 @@ const Item = styled.div`
   img {
     width: 100%;
     border-radius: 10px;
+    cursor: pointer;
   }
   p {
     font-weight: 700;
   }
   span {
     color: rgb(0 0 0 / 60%);
-  }
-  div {
-    width: 92%;
-    z-index: 999;
-    position: absolute;
-    top: 1200px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #000;
-    border: 1px solid black;
-    border-radius: 8px;
-  }
-  button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-  iframe {
   }
 `;
