@@ -19,7 +19,7 @@ const VideoModal = ({ id, url, setModalOpen }) => {
   return (
     <ModalWrap ref={modalEl}>
       <button onClick={() => setModalOpen(false)}>X</button>
-      <iframe key={id} title={id} src={url} width="600" height="300"></iframe>
+      <iframe key={id} title={id} src={url} width="1417" height="796"></iframe>
     </ModalWrap>
   );
 };
@@ -27,11 +27,11 @@ const VideoModal = ({ id, url, setModalOpen }) => {
 export default VideoModal;
 
 const ModalWrap = styled.div`
-  width: 92%;
+  width: 80%;
   z-index: 999;
   position: absolute;
-  margin-top: -80px;
-  left: 48%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   background-color: #000;
   border: 1px solid black;
@@ -41,5 +41,10 @@ const ModalWrap = styled.div`
     position: absolute;
     right: 10px;
     top: 10px;
+    background-color: #000;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
   }
 `;
