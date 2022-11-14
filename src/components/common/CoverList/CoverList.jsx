@@ -62,11 +62,13 @@ const CoverList = ({ headerTitle, data, types, changeTab, category }) => {
                 }
               />
               {modalOpen && videoUrl.id === e.id && (
-                <VideoModal
-                  id={e.id}
-                  url={videoUrl.url}
-                  setModalOpen={setModalOpen}
-                ></VideoModal>
+                <VideoWrap>
+                  <VideoModal
+                    id={e.id}
+                    url={videoUrl.url}
+                    setModalOpen={setModalOpen}
+                  ></VideoModal>
+                </VideoWrap>
               )}
               <p>
                 {e.title ? e.title : e.name} <span>⭐️ {e.vote_average}</span>
@@ -154,4 +156,13 @@ const Item = styled.div`
   span {
     color: rgb(0 0 0 / 60%);
   }
+`;
+
+const VideoWrap = styled.section`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
 `;
