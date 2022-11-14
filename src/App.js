@@ -5,6 +5,7 @@
 
 import {
   HomePage,
+  SearchPage,
   MovieDetailPage,
   CharacterDetailPage,
   CharacterPage,
@@ -15,6 +16,7 @@ import {
   CHARACTER_LIST_PAGE,
   CHARACTER_DETAIL_PAGE,
   HOME_PAGE,
+  SEARCH_PAGE,
   MOVIE_DETAIL_PAGE,
   MOVIE_POPULAR_PAGE,
 } from 'util/consts';
@@ -24,12 +26,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path={HOME_PAGE} element={<HomePage />}></Route>
+        <Route path={SEARCH_PAGE} element={<SearchPage />}></Route>
         <Route path={MOVIE_POPULAR_PAGE} element={<MoviePage />}></Route>
         <Route path={MOVIE_DETAIL_PAGE} element={<MovieDetailPage />}></Route>
-        <Route
-          path={CHARACTER_LIST_PAGE}
-          element={<CharacterPage />}
-        ></Route>
+        <Route path={CHARACTER_LIST_PAGE} element={<CharacterPage />}></Route>
         <Route
           path={CHARACTER_DETAIL_PAGE}
           element={<CharacterDetailPage />}
