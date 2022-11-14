@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from 'components/common/Layout/Layout';
+import { SearchBar } from 'components/common/SearchBar';
 import { CoverList } from 'components/common/CoverList';
 import { getDiscover, getTrending, getUpcoming } from 'util/consts';
 
@@ -72,6 +73,7 @@ const Home = () => {
 
   return (
     <Layout>
+      <SearchBar />
       {popularTypes.length > 0 && (
         <CoverList
           headerTitle="What's Popular"
