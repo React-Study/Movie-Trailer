@@ -30,7 +30,7 @@ const ModalWrap = styled.div`
   width: 92%;
   z-index: 999;
   position: absolute;
-  top: 1210px;
+  margin-top: -80px;
   left: 48%;
   transform: translate(-50%, -50%);
   background-color: #000;
