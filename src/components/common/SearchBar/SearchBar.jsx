@@ -1,7 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { getSearch } from 'util/consts';
 
 const SearchBar = () => {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const [searchData, setSearchData] = useState([]);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleClick();
+    }
+  };
+
+  const handleClick = () => {
+    getSearchData('ko-KR', search);
+    navigate('/search');
+  };
+
+  const getSearchData = async (language, query) => {
+    setSearchData(await getSearch(language, query));
+  };
+
+  useEffect(() => {}, [searchData]);
+
   return (
     <SearchWrap>
       <p>Welcome.</p>
@@ -11,10 +38,12 @@ const SearchBar = () => {
       <br />
       <input
         type="text"
-        name="text"
+        value={search}
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
         placeholder="영화, TV 프로그램, 인물 검색..."
       />
-      <button type="submit">검색</button>
+      <button onClick={handleClick}>검색</button>
     </SearchWrap>
   );
 };
