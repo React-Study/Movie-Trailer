@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Title = () => {
+const Title = ({ title }) => {
   return (
     <TitleName>
-      <h2>인기 영화</h2>
+      <h2>{title}</h2>
     </TitleName>
   );
 };

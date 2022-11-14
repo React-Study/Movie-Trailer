@@ -13,7 +13,7 @@ const CardListLayout = ({ children }) => {
           <div className="media discover">
             <div className="column_wrapper">
               <div className="content_wrapper">
-                <Title />
+                <Title title={'인기 영화'} />
                 <div className="content">{children}</div>
               </div>
             </div>
