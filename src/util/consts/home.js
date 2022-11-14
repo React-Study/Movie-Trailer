@@ -4,6 +4,8 @@ const DISCOVER_API_ENDPOINT = '/discover';
 const TRENDING_API_ENDPOINT = '/trending';
 const UPCOMING_API_ENDPOINT = '/movie/upcoming';
 
+export const YOUTUBE_URL = 'https://www.youtube.com/embed/';
+
 export const getDiscover = async (type, params) => {
   try {
     const response = await http.get({
