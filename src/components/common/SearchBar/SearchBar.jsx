@@ -20,11 +20,16 @@ const SearchBar = () => {
 
   const handleClick = () => {
     getSearchData('ko-KR', search);
-    navigate('/search');
   };
 
   const getSearchData = async (language, query) => {
-    setSearchData(await getSearch(language, query));
+    const searchData = await getSearch(language, query);
+    setSearchData(searchData);
+    navigate('/search', {
+      state: {
+        data: searchData,
+      },
+    });
   };
 
   useEffect(() => {}, [searchData]);
