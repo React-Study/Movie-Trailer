@@ -15,7 +15,7 @@ const Character = () => {
 
     const getCharacterData = async () => {
       setCharacterData(await getCharacter('popular', {language: 'ko-KR', page: page}));
-    };
+    }; 
   
     useEffect(() => {
       getCharacterData();
