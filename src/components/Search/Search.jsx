@@ -61,6 +61,7 @@ const Search = () => {
                 </ListItem>
               );
             })}
+          {movieData.length === 0 && `검색 결과가 없습니다.`}
         </ListWrap>
       </ResultWrap>
     </Layout>
@@ -93,7 +94,7 @@ const MenuWrap = styled.div`
     font-size: 1em;
     font-weight: bold;
     color: white;
-    background-color: gray;
+    background-color: lightblue;
     border-radius: 10px 10px 0px 0px;
   }
 `;
