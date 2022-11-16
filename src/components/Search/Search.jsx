@@ -8,30 +8,30 @@ const Search = () => {
   const location = useLocation();
   const data = location.state.data;
   const menuList = ['영화', 'TV 프로그램'];
-  const [tvData, setTvData] = useState([]);
   const [movieData, setMovieData] = useState([]);
+  const [tvData, setTvData] = useState([]);
+  const [personData, setPersonData] = useState([]);
 
-  const setData = () => {
-    const movieArr = [];
-    const tvArr = [];
-    for (const results of data.results) {
-      switch (results.media_type) {
-        case 'movie':
-          movieArr.push(results);
-          break;
-        case 'tv':
-          tvArr.push(results);
-          break;
-        default:
-          break;
-      }
-    }
-    setMovieData(movieArr);
-    setTvData(tvArr);
+  const setGroup = (array, getKey) => {
+    const out = {};
+    array.forEach((item) => {
+      const key = getKey(item);
+      if (!(key in out)) out[key] = [];
+      out[key].push(item);
+    });
+    return out;
   };
 
+  const {
+    movie: movieList,
+    tv: tvList,
+    person: personList,
+  } = setGroup(data.results, (item) => item.media_type);
+
   useEffect(() => {
-    setData();
+    setMovieData(movieList);
+    setTvData(tvList);
+    setPersonData(personList);
   }, []);
 
   return (
@@ -39,6 +39,7 @@ const Search = () => {
       <ResultWrap>
         {console.info('tvData', tvData)}
         {console.info('movieData', movieData)}
+        {console.info('personData', personData)}
         <MenuWrap>
           <p>Search Results</p>
           {menuList.map((e, idx) => {
