@@ -2,67 +2,69 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Layout from 'components/common/Layout/Layout';
 import styled from 'styled-components';
-import { BASE_IMAGE_URL, w94h141 } from 'util/consts';
-
+import { mergeData, menuTypeText } from 'util/consts';
 const Search = () => {
   const location = useLocation();
   const data = location.state.data;
-  const menuList = ['영화', 'TV 프로그램'];
-  const [movieData, setMovieData] = useState([]);
-  const [tvData, setTvData] = useState([]);
-  const [personData, setPersonData] = useState([]);
+  const [menu, setMenu] = useState([]);
+  const [active, setActive] = useState('');
+  const [groupData, setGroupData] = useState([]);
 
   const setGroup = (array, getKey) => {
+    const keyList = [];
     const out = {};
-    array.forEach((item) => {
+    array.forEach((item, idx) => {
       const key = getKey(item);
+      idx === 0 && setActive(key);
+      !keyList.includes(key) && keyList.push(key);
+      mergeData(item);
       if (!(key in out)) out[key] = [];
       out[key].push(item);
     });
+    setMenu(keyList);
     return out;
   };
 
-  const {
-    movie: movieList,
-    tv: tvList,
-    person: personList,
-  } = setGroup(data.results, (item) => item.media_type);
-
   useEffect(() => {
-    setMovieData(movieList);
-    setTvData(tvList);
-    setPersonData(personList);
-  }, []);
+    setGroupData(setGroup(data.results, (item) => item.media_type));
+  }, [data.results]);
 
   return (
     <Layout>
       <ResultWrap>
-        {console.info('tvData', tvData)}
-        {console.info('movieData', movieData)}
-        {console.info('personData', personData)}
         <MenuWrap>
           <p>Search Results</p>
-          {menuList.map((e, idx) => {
-            return <MenuItem key={idx}>{e}</MenuItem>;
-          })}
+          {menu.length > 0 &&
+            menu.map((e) => {
+              return (
+                <MenuItem
+                  key={e}
+                  active={active === e}
+                  onClick={() => {
+                    setActive(e);
+                  }}
+                >
+                  {menuTypeText(e)}
+                </MenuItem>
+              );
+            })}
         </MenuWrap>
         <ListWrap>
-          {movieData.length > 0 &&
-            movieData.map((e, idx) => {
+          {Object.keys(groupData).length > 0 &&
+            groupData[active] &&
+            groupData[active].length > 0 &&
+            groupData[active].map((e, idx) => {
               return (
                 <ListItem key={idx}>
-                  <img
-                    src={`${BASE_IMAGE_URL}${w94h141}${e.poster_path}`}
-                    alt={e.title ? e.title : e.name}
-                  />
+                  <img src={e.poster_path} alt={e.title && e.title} />
                   <Content>
-                    <p>{e.title}</p>
-                    <span>{e.overview}</span>
+                    <p>{e.title && e.title}</p>
+                    <span>{e.overview && e.overview}</span>
                   </Content>
                 </ListItem>
               );
             })}
-          {movieData.length === 0 && `검색 결과가 없습니다.`}
+          {Object.keys(groupData).length === 0 && `검색 결과가 없습니다.`}
         </ListWrap>
       </ResultWrap>
     </Layout>
@@ -105,6 +107,12 @@ const MenuItem = styled.div`
   font-size: 1em;
   line-height: 1.4em;
   cursor: pointer;
+  ${({ active }) =>
+    active &&
+    `
+    color: white;
+    background-color: gray;
+  `}
 `;
 
 const ListWrap = styled.div`
@@ -124,6 +132,8 @@ const ListItem = styled.div`
   border: 1px solid rgba(var(--lightGrey), 1);
   border-radius: 10px;
   img {
+    width: 94px;
+    height: 141px;
     border-radius: 10px;
     cursor: pointer;
   }
