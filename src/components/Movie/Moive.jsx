@@ -1,44 +1,50 @@
 import { CardListLayout } from 'components/common';
 import { Filter } from 'components/common/Filter';
 import { MovieList } from 'components/common/MovieCard';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getMovie } from 'util/consts';
+import { useInView } from 'react-intersection-observer';
 
 const Moive = () => {
-  const [movieData, setMovieData] = useState(null);
   const [movieList, setMovieList] = useState([]);
   const [page, setPage] = useState(1);
+  const [ref, inView] = useInView();
+  const [loading, setLoading] = useState(true);
 
-  const getMovieData = async (page) => {
-    if (page === 1) {
-      await getMovie('popular', { language: 'ko-KR', page: page }).then(
-        (data) => {
-          setMovieData(data);
-          setMovieList(data.results);
-        },
-      );
-    } else {
-      await getMovie('popular', { language: 'ko-KR', page: page }).then(
-        (data) => {
-          setMovieList([...movieList, ...data.results]);
-        },
-      );
-    }
+  const getMovieData = useCallback(async () => {
+    await getMovie('popular', { language: 'ko-KR', page: page }).then(
+      (data) => {
+        // setMovieList(movieList.concat(data.results));
+        setMovieList((prevState) => prevState.concat(data.results));
+      },
+    );
+  }, [page]);
+
+  useEffect(() => {
+    getMovieData();
+  }, [getMovieData]);
+
+  const loadingChange = () => {
+    setLoading(false);
+    setPage(page + 1);
   };
 
   useEffect(() => {
-    getMovieData(page);
-  }, [page]);
-
-  const pageAdd = () => {
-    setPage(page + 1);
-  };
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading) {
+      setPage(page + 1);
+    }
+  }, [inView]);
 
   return (
     <CardListLayout>
       <Filter />
-      {movieData !== null ? (
-        <MovieList moiveList={movieList} pageAdd={pageAdd} />
+      {movieList.length > 0 ? (
+        <MovieList
+          myKey={ref}
+          moiveList={movieList}
+          loadingChange={loadingChange}
+        />
       ) : null}
     </CardListLayout>
   );

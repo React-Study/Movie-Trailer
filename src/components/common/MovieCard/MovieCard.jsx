@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { BASE_IMAGE_URL, w220h330 } from 'util/consts';
 import { createGlobalStyle } from 'styled-components';
 
-const MovieCard = ({ movieData }) => {
+const MovieCard = ({ movieData, myKey }) => {
   const { poster_path, release_date } = movieData;
   return (
-    <CardBody>
+    <CardBody ref={myKey}>
       <GlobalStyles />
       <div className="image">
         <div className="wrapper">
@@ -14,6 +14,7 @@ const MovieCard = ({ movieData }) => {
             <img
               className="poster"
               src={`${BASE_IMAGE_URL}${w220h330}${poster_path}`}
+              alt=""
             />
           </div>
         </div>

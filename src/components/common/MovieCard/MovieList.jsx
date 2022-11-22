@@ -2,14 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import MovieCard from './MovieCard';
 
-const MovieList = ({ moiveList, pageAdd }) => {
+const MovieList = ({ moiveList, myKey, loadingChange }) => {
   return (
     <div>
       <ListBody>
         <div className="panel results">
           <div className="page_wrapper results">
-            {moiveList.map((data) => {
-              return <MovieCard key={data.id} movieData={data} />;
+            {moiveList.map((data, idx) => {
+              return moiveList.length - 1 === idx ? (
+                <MovieCard key={data.id} movieData={data} myKey={myKey} />
+              ) : (
+                <MovieCard key={data.id} movieData={data} />
+              );
             })}
             <LoadMore
               id="pagination_page_1"
@@ -22,7 +26,7 @@ const MovieList = ({ moiveList, pageAdd }) => {
                   className="no_click load_more"
                   data-next-page="2"
                   data-current-page="1"
-                  onClick={pageAdd}
+                  onClick={loadingChange}
                 >
                   더 불러오기
                 </div>
