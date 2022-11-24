@@ -34,6 +34,7 @@ const CoverListWrap = styled.section`
 `;
 
 const ItemList = styled.div`
+  width: 850px;
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
