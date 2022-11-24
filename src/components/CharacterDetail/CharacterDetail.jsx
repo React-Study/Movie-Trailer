@@ -58,6 +58,7 @@ const CharacterDetail = ({data, data2, data3}) => {
           {/* {characterCreditData.cast} */}
           <CharacterMovieList data={data3}/>
           <h2>연기</h2>
+          <CharacterMovieList data={data3}/>
         </RightBox>
     </DetailBox>
   );
