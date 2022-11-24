@@ -2,17 +2,18 @@ import React from 'react';
 import CharacterBox from './CharacterBox';
 import styled from 'styled-components';
 
-const CharacterList = ({characterList}) => {
+const CharacterList = ({ characterList }) => {
   const { results } = characterList;
 
   return (
     <ListBody>
-      <h2 className='title'>인기 인물</h2>
-        <div className='list_wrap'>
-          {results && results.map((data) => {
+      <h2 className="title">인기 인물</h2>
+      <div className="list_wrap">
+        {results &&
+          results.map((data) => {
             return <CharacterBox key={data.id} characterData={data} />;
           })}
-        </div>
+      </div>
     </ListBody>
   );
 };
@@ -45,5 +46,4 @@ const ListBody = styled.div`
       margin: 0 auto;
     }
   }
-`
-
+`;

@@ -2,28 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import { BASE_IMAGE_URL, w150h225 } from 'util/consts';
 
-const CharacterMovieList = ({data}) => {
-  const {cast} = data;
-    console.info('hahaha',cast);
+const CharacterMovieList = ({ data }) => {
+  const { cast } = data;
+  console.info('hahaha', cast);
 
-    return (
-        <CoverListWrap>
-          <ItemList>
-              {cast && 
-              cast.filter((e)=>e.poster_path).sort((a,b)=>b.popularity-a.popularity).map((e) => (
-                  <Item key={e.id}>
-                  <img
-                      src={`${BASE_IMAGE_URL}${w150h225}${e.poster_path}`}
-                      alt={e.title}
-                  />
-                  <p>
-                      {e.title ? e.title : e.name}
-                  </p>
-                  </Item>
-              ))}
-          </ItemList>
-        </CoverListWrap>
-    );
+  return (
+    <CoverListWrap>
+      <ItemList>
+        {cast &&
+          cast
+            .filter((e) => e.poster_path)
+            .sort((a, b) => b.popularity - a.popularity)
+            .map((e) => (
+              <Item key={e.id}>
+                <img
+                  src={`${BASE_IMAGE_URL}${w150h225}${e.poster_path}`}
+                  alt={e.title}
+                />
+                <p>{e.title ? e.title : e.name}</p>
+              </Item>
+            ))}
+      </ItemList>
+    </CoverListWrap>
+  );
 };
 
 export default CharacterMovieList;

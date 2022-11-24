@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getCharacterCreidit, getCharacterDetail, getCharacterMovieCreidit } from 'util/consts';
+import {
+  getCharacterCreidit,
+  getCharacterDetail,
+  getCharacterMovieCreidit,
+} from 'util/consts';
 import { useParams } from 'react-router-dom';
 import { Layout } from 'components/common';
 import CharacterDetail from './CharacterDetail';
@@ -24,7 +28,7 @@ const CharacterDetailLayout = () => {
   };
 
   useEffect(() => {
-    if(id) {
+    if (id) {
       getCharacterDetailData(id);
       getCharacterCreiditData(id);
       getCharacterMovieCreiditData(id);
@@ -32,7 +36,15 @@ const CharacterDetailLayout = () => {
   }, [id]);
 
   return (
-    <Layout children={<CharacterDetail data={characterDetailData} data2={characterCreditData} data3={characterMovieCreditData} />}/>
+    <Layout
+      children={
+        <CharacterDetail
+          data={characterDetailData}
+          data2={characterCreditData}
+          data3={characterMovieCreditData}
+        />
+      }
+    />
   );
 };
 
