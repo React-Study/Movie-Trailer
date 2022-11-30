@@ -19,6 +19,33 @@ export const getMovieDetail = async (movieId, language) => {
   }
 };
 
+export const getMovieCredits = async (movieId, language) => {
+  try {
+    const res = await http.get({
+      url: `${MOVIE_API_ENDPOINT}/${movieId}/credits`,
+      params: {
+        language: language,
+      },
+    });
+
+    return res.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+export const getMoviePoster = async (movieId) => {
+  try {
+    const res = await http.get({
+      url: `${MOVIE_API_ENDPOINT}/${movieId}/images`,
+    });
+
+    return res.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
 export const getMovie = async (pageName, paramObj) => {
   try {
     const res = await http.get({
