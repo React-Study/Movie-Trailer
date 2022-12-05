@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getCharacterCreidit, getCharacterDetail, getCharacterMovieCreidit } from 'util/consts';
+import {
+  getCharacterCreidit,
+  getCharacterDetail,
+  getCharacterMovieCreidit,
+  getCharacterAct,
+} from 'util/consts';
 import { useParams } from 'react-router-dom';
 import { Layout } from 'components/common';
 import CharacterDetail from './CharacterDetail';
@@ -23,16 +28,31 @@ const CharacterDetailLayout = () => {
     setCharacterMovieCreditData(await getCharacterMovieCreidit(id, 'ko-KR'));
   };
 
+  const [characterActData, setCharacterActData] = useState([]);
+  const getCharacterActData = async (id) => {
+    setCharacterActData(await getCharacterAct(id, 'ko-KR'));
+  };
+
   useEffect(() => {
-    if(id) {
+    if (id) {
       getCharacterDetailData(id);
       getCharacterCreiditData(id);
       getCharacterMovieCreiditData(id);
+      getCharacterActData(id);
     }
   }, [id]);
 
   return (
-    <Layout children={<CharacterDetail data={characterDetailData} data2={characterCreditData} data3={characterMovieCreditData} />}/>
+    <Layout
+      children={
+        <CharacterDetail
+          data={characterDetailData}
+          data2={characterCreditData}
+          data3={characterMovieCreditData}
+          data4={characterActData}
+        />
+      }
+    />
   );
 };
 

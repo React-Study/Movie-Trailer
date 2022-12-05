@@ -4,43 +4,44 @@ import { BASE_IMAGE_URL, w235h235 } from 'util/consts';
 
 const CHARACTER_DETAIL = 'characterDetail/';
 
-const CharacterBox = ({characterData}) => {
-    const {id} = characterData;
-    
-    const sub_title = [];
+const CharacterBox = ({ characterData }) => {
+  const { id } = characterData;
 
-    function sub(sub_title){
-        {characterData.known_for.forEach((e)=>{
-            sub_title.push(`${e.title || e.name}`);
-            sub_title.push(', ');
-        })}
-        sub_title.pop();
+  const sub_title = [];
+
+  function sub(sub_title) {
+    {
+      characterData.known_for.forEach((e) => {
+        sub_title.push(`${e.title || e.name}`);
+        sub_title.push(', ');
+      });
     }
-    sub(sub_title);
-    
+    sub_title.pop();
+  }
+  sub(sub_title);
 
-    return (
-        <Box className='box'>
-            <div className='box_wrap'>
-                <div className='img_wrap'>
-                    <a href={`${CHARACTER_DETAIL}${id}`}>
-                    <img
-                    className="poster"
-                    src={`${BASE_IMAGE_URL}${w235h235}${characterData.profile_path}`}
-                    />
-                    </a>
-                </div>
-                <Content>
-                    <div className='content'>
-                        <a href={`${CHARACTER_DETAIL}${id}`}>
-                        <p className='name'>{characterData.name}</p>
-                        </a>
-                        <p className='sub'>{sub_title}</p>
-                    </div>
-                </Content>
-            </div>
-        </Box>
-    );
+  return (
+    <Box className="box">
+      <div className="box_wrap">
+        <div className="img_wrap">
+          <a href={`${CHARACTER_DETAIL}${id}`}>
+            <img
+              className="poster"
+              src={`${BASE_IMAGE_URL}${w235h235}${characterData.profile_path}`}
+            />
+          </a>
+        </div>
+        <Content>
+          <div className="content">
+            <a href={`${CHARACTER_DETAIL}${id}`}>
+              <p className="name">{characterData.name}</p>
+            </a>
+            <p className="sub">{sub_title}</p>
+          </div>
+        </Content>
+      </div>
+    </Box>
+  );
 };
 
 export default CharacterBox;
@@ -64,30 +65,30 @@ const Box = styled.div`
             width: 100%;
         }
     }
-`
+`;
 
 const Content = styled.div`
-    // background: red;
-    padding: 10px;
-    a {
-        color: #2d2d2d;
-    }
-    .name {
-        font-weight: 600;
-        white-space: nowrap;
-        overflow:hidden;
-        text-overflow: ellipsis;
-    }
-    .sub {
-        // background: aqua;
-        font-family: 'Source Sans Pro', Arial, sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        padding: 5px 0;
-        width: 100%;
-        height: 7px;
-        white-space: nowrap;
-        overflow:hidden;
-        text-overflow: ellipsis;
-    }
-`
+  // background: red;
+  padding: 10px;
+  a {
+    color: #2d2d2d;
+  }
+  .name {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sub {
+    // background: aqua;
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 5px 0;
+    width: 100%;
+    height: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;

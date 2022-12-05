@@ -6,37 +6,41 @@ import { getCharacter } from 'util/consts';
 import styled from 'styled-components';
 
 const Character = () => {
-    const [characterData, setCharacterData] = useState([]);
-    const [page, setPage] = useState(1);
+  const [characterData, setCharacterData] = useState([]);
+  const [page, setPage] = useState(1);
 
-    const handlePageChange = (page=> {
-      setPage(page);
-    })
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
 
-    const getCharacterData = async () => {
-      setCharacterData(await getCharacter('popular', {language: 'ko-KR', page: page}));
-    };
-  
-    useEffect(() => {
-      getCharacterData();
-    }, [page]);
-
-    return (
-        <Layout>
-            {characterData !== null ? <CharacterList characterList={characterData}/> : null}
-            <Page>
-            <Pagination
-              activePage={page}
-              itemsCountPerPage={1}
-              totalItemsCount={500}
-              pageRangeDisplayed={10}
-              prevPageText={"‹"}
-              nextPageText={"›"}
-              onChange={handlePageChange}
-            />
-            </Page>
-        </Layout>
+  const getCharacterData = async () => {
+    setCharacterData(
+      await getCharacter('popular', { language: 'ko-KR', page: page }),
     );
+  };
+
+  useEffect(() => {
+    getCharacterData();
+  }, [page]);
+
+  return (
+    <Layout>
+      {characterData !== null ? (
+        <CharacterList characterList={characterData} />
+      ) : null}
+      <Page>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={1}
+          totalItemsCount={500}
+          pageRangeDisplayed={10}
+          prevPageText={'‹'}
+          nextPageText={'›'}
+          onChange={handlePageChange}
+        />
+      </Page>
+    </Layout>
+  );
 };
 
 export default Character;
@@ -64,11 +68,11 @@ const Page = styled.div`
     font-size: 1rem;
   }
 
-  ul.pagination li:first-child{
+  ul.pagination li:first-child {
     border-radius: 5px 0 0 5px;
   }
 
-  ul.pagination li:last-child{
+  ul.pagination li:last-child {
     border-radius: 0 5px 5px 0;
   }
 
@@ -97,4 +101,4 @@ const Page = styled.div`
     height: 30px;
     color: #337ab7;
   }
-`
+`;
