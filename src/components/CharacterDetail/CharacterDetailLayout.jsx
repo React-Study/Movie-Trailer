@@ -3,7 +3,7 @@ import {
   getCharacterCreidit,
   getCharacterDetail,
   getCharacterMovieCreidit,
-  getCharacterAct
+  getCharacterAct,
 } from 'util/consts';
 import { useParams } from 'react-router-dom';
 import { Layout } from 'components/common';
@@ -38,7 +38,7 @@ const CharacterDetailLayout = () => {
       getCharacterDetailData(id);
       getCharacterCreiditData(id);
       getCharacterMovieCreiditData(id);
-      getCharacterActData(id)
+      getCharacterActData(id);
     }
   }, [id]);
 
