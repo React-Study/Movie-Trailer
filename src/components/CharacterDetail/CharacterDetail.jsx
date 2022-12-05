@@ -5,6 +5,8 @@ import { IMAGE_URL } from 'util/consts';
 import CharacterMovieList from './CharacterMovieList';
 
 const CharacterDetail = ({data, data2, data3}) => {
+  console.info('111', data);
+  console.info('222', data2);
   console.info('333', data3);
   const {
     name,
@@ -17,6 +19,9 @@ const CharacterDetail = ({data, data2, data3}) => {
   const {
     translations
   } = data2;
+  const {
+    cast
+  } = data3;
   // useEffect(() => {
 	// 	if(data2 && data2.length > 0) {
 	// 		// console.info(data2.translations[0]);
@@ -25,6 +30,10 @@ const CharacterDetail = ({data, data2, data3}) => {
 	// 	}
 	// }, [data2])
   console.info(translations)
+  
+  const year = Array(2022).fill().map((v, i) => i-1);
+  console.info(year);
+  
 
   let bio = translations? translations[0].data.biography : '';
   console.info(bio);
@@ -58,12 +67,51 @@ const CharacterDetail = ({data, data2, data3}) => {
           {/* {characterCreditData.cast} */}
           <CharacterMovieList data={data3}/>
           <h2>연기</h2>
+          <ActingBox>
+            {cast && cast.sort((a,b)=>b.release_date.split('-')[0]-a.release_date.split('-')[0]).filter((a)=>  
+            
+              2000 === Number(a.release_date.split('-')[0])
+              ).map(e=>(
+              console.info('hohoho',e.release_date)
+              // console.info(e.character)
+              // console.info(e.title)
+                  // <div key={e.id}>
+                  //   <table>
+                  //     <tr>
+                  //       <td class='act_date'>{e.release_date.split('-')[0]}</td>
+                  //       <td class='act_title'>{e.title}</td>
+                  //       <td class='act_character'>{e.character} 역</td>
+                  //     </tr>
+                  //   </table>
+                  // </div>
+
+
+            ))}
+          </ActingBox>
         </RightBox>
     </DetailBox>
   );
 };
 
 export default CharacterDetail;
+
+const ActingBox = styled.div`
+  tr {
+    .act_date {
+      font-size: 17px;
+      color: rgba(0,0,0,0.6);
+    }
+    .act_title {
+      font-size: 18px;
+    }
+    .act_character {
+      font-size: 17px;
+      font-weight: 500;
+      color: rgba(0,0,0,0.5);
+      padding-left: 5px;
+    }
+  }
+`;
 
 const DetailBox = styled.div`
   padding: 80px 10%;
