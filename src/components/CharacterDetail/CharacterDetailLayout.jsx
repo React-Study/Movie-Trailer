@@ -3,6 +3,7 @@ import {
   getCharacterCreidit,
   getCharacterDetail,
   getCharacterMovieCreidit,
+  getCharacterAct
 } from 'util/consts';
 import { useParams } from 'react-router-dom';
 import { Layout } from 'components/common';
@@ -27,11 +28,17 @@ const CharacterDetailLayout = () => {
     setCharacterMovieCreditData(await getCharacterMovieCreidit(id, 'ko-KR'));
   };
 
+  const [characterActData, setCharacterActData] = useState([]);
+  const getCharacterActData = async (id) => {
+    setCharacterActData(await getCharacterAct(id, 'ko-KR'));
+  };
+
   useEffect(() => {
     if (id) {
       getCharacterDetailData(id);
       getCharacterCreiditData(id);
       getCharacterMovieCreiditData(id);
+      getCharacterActData(id)
     }
   }, [id]);
 
@@ -42,6 +49,7 @@ const CharacterDetailLayout = () => {
           data={characterDetailData}
           data2={characterCreditData}
           data3={characterMovieCreditData}
+          data4={characterActData}
         />
       }
     />

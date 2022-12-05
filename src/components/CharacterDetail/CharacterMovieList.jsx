@@ -4,7 +4,7 @@ import { BASE_IMAGE_URL, w150h225 } from 'util/consts';
 
 const CharacterMovieList = ({ data }) => {
   const { cast } = data;
-  console.info('hahaha', cast);
+  // console.info('hahaha', cast);
 
   return (
     <CoverListWrap>

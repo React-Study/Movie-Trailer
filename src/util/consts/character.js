@@ -65,7 +65,7 @@ export const getCharacterMovieCreidit = async (charcterId, language) => {
   }
 };
 
-export const getCombinedCreidit = async (charcterId, language) => {
+export const getCharacterAct = async (charcterId, language) => {
   try {
     const res = await http.get({
       url: `${CHARACTER_API_ENDPOINT}/${charcterId}/combined_credits`,
