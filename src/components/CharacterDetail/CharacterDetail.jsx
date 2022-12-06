@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { IMAGE_URL } from 'util/consts';
 import CharacterMovieList from './CharacterMovieList';
 import CharacterActList from './CharacterActList';
+import { useState } from 'react';
 
 const CharacterDetail = ({ data, data2, data3, data4 }) => {
   console.info('111', data);
@@ -29,10 +30,10 @@ const CharacterDetail = ({ data, data2, data3, data4 }) => {
   // }, [data2])
   console.info(translations);
 
-  const year = Array(2022)
-    .fill()
-    .map((v, i) => i - 1);
-  console.info(year);
+  // const year = Array(2022)
+  //   .fill()
+  //   .map((v, i) => i - 1);
+  // console.info(year);
 
   let bio = translations ? translations[0].data.biography : '';
   console.info(bio);
@@ -42,6 +43,27 @@ const CharacterDetail = ({ data, data2, data3, data4 }) => {
     personGender = '남성';
   } else {
     personGender = '여성';
+  }
+ /* eslint-disable */
+  const [btn_info, setBtn_info] = useState("all");
+  // let btn_info = "모두";
+  
+  function btnClickMovie() {
+    setBtn_info("movie");
+    // console.info(btn_info)
+  }
+
+  function btnClickTv() {
+    setBtn_info("tv");
+    console.info(btn_info)
+  }
+
+  function btnClickAll() {
+    setBtn_info("all");
+  }
+
+  function onToggle() {
+    document.querySelector('.innerBox').classList.toggle('active')
   }
 
   return (
@@ -68,8 +90,21 @@ const CharacterDetail = ({ data, data2, data3, data4 }) => {
         <h2>유명 분야</h2>
         {/* {characterCreditData.cast} */}
         <CharacterMovieList data={data3} />
-        <h2>연기</h2>
-        <CharacterActList data={data4.cast} />
+        <div className='tableBox'>
+          <h2>연기</h2>
+          <div className='btn'>
+            <span onClick={onToggle}>미디어 ▼
+              <div className='innerBox'>
+                <ul>
+                <li onClick={btnClickAll}>all</li>
+                  <li onClick={btnClickMovie}>영화</li>
+                  <li onClick={btnClickTv}>TV</li>
+                </ul>
+              </div>
+            </span>
+          </div>
+        </div>
+        <CharacterActList data={data4} btn_info={btn_info}/>
       </RightBox>
     </DetailBox>
   );
@@ -117,5 +152,37 @@ const RightBox = styled.div`
   p {
     font-size: 15px;
     font-weight: normal;
+  }
+  .tableBox {
+    display: flex;
+    .btn {
+      span {
+        // background: red;
+      }
+      position: relative;
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 40px;
+      margin-bottom: 18px;
+      margin-left: 80%;
+      .innerBox.active {
+        display: block;
+      }
+      .innerBox {
+        display: none;
+        position: absolute;
+        margin-top: 15px;
+        border: 1px solid #2d2d2d;
+        width: 120px;
+        height: 80px;
+        ul {
+          li {
+            font-size: 15px;
+            margin: 10px;
+            width: 50%;
+          }
+        }
+      }
+    }
   }
 `;
