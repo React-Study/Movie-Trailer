@@ -155,6 +155,7 @@ const RightBox = styled.div`
   }
   .tableBox {
     display: flex;
+    justify-content: space-between;
     .btn {
       span {
         // background: red;
@@ -175,6 +176,7 @@ const RightBox = styled.div`
         border: 1px solid #2d2d2d;
         width: 120px;
         height: 80px;
+        background: white;
         ul {
           li {
             font-size: 15px;
@@ -184,5 +186,8 @@ const RightBox = styled.div`
         }
       }
     }
+     span {
+      cursor: pointer;
+     }
   }
 `;

@@ -5,6 +5,7 @@ const CharacterActList = ({ data, btn_info }) => {
   const {cast} = data;
   console.info(btn_info)
   console.info('data4/cast', cast);
+
   return (
     <ActingBox>
       {
